@@ -23,7 +23,6 @@ COLS <- as.vector(grepl(paste(pattern, collapse="|"), names(TE3)))
 TE3 <- TE3[ , COLS, with=FALSE]
 
 testset <- cbind(TE1, TE2, TE3)
-##print(str(trainset,2))
 
 ## read and merge trainset
 setwd("~/Coursera/Data/UCI HAR Dataset/train")
@@ -44,4 +43,6 @@ totalset$activityid <- ActNames$activityname[match(totalset$activityid, ActNames
 ##create subset with averages
 mynewset <- totalset %>% group_by(activityid, subjectid) %>% summarise_all(funs(mean))
 
+setwd("~/Coursera/Data/")
+write.table(mynewset, "newset.txt", sep = ",", row.names = FALSE)
       
